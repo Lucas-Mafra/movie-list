@@ -1,4 +1,4 @@
-import { Box, Container, Flex } from "@chakra-ui/react";
+import { Box, Center, Container, Flex } from "@chakra-ui/react";
 import React from "react";
 import { Link } from "react-router-dom";
 
@@ -20,7 +20,7 @@ const Navbar = () => {
             </Box>
           </Link>
           {/* Desktop */}
-          <Flex>
+          <Flex gap={4} alignItems={"center"}>
             <Link to="/">Home</Link>
             <Link to="/movies">Movies</Link>
             <Link to="/shows">Shows</Link>
