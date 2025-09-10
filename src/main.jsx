@@ -5,6 +5,10 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./index.css";
 import App from "./App.jsx";
 import theme from "../theme.js";
+import Home from "./pages/Home.jsx";
+import Movies from "./pages/movies/Movies.jsx";
+import Shows from "./pages/shows/Shows.jsx";
+import Search from "./pages/search/Search.jsx";
 
 const router = createBrowserRouter([
   {
@@ -13,19 +17,19 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <h1>Home</h1>,
+        element: <Home />,
       },
       {
         path: "/movies",
-        element: <h1>Movies</h1>,
+        element: <Movies />,
       },
       {
         path: "/shows",
-        element: <h1>Tv Shows</h1>,
+        element: <Shows />,
       },
       {
         path: "/search",
-        element: <h1>Search</h1>,
+        element: <Search />,
       },
     ],
   },
@@ -42,7 +46,7 @@ createRoot(document.getElementById("root")).render(
   <StrictMode>
     <ColorModeScript initialColorMode={theme.config.initialColorMode} />
     <ChakraProvider theme={theme} colorModeManager={customStorageManager}>
-      <RouterProvider router={router}/>
+      <RouterProvider router={router} />
     </ChakraProvider>
   </StrictMode>
 );
