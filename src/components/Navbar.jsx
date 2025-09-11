@@ -1,6 +1,9 @@
 import { Box, Center, Container, Flex } from "@chakra-ui/react";
+import { motion } from "framer-motion";
 import React from "react";
 import { Link } from "react-router-dom";
+
+const MotionBox = motion(Box);
 
 const Navbar = () => {
   return (
@@ -9,15 +12,26 @@ const Navbar = () => {
         <Flex justifyContent={"space-between"}>
           {/* LOGO */}
           <Link to="/">
-            <Box
-              fontSize={"2xl"}
-              fontWeight={"bold"}
-              color={"red"}
-              letterSpacing={"widest"}
-              fontFamily={"monospace"}
+            <MotionBox
+              fontSize="2xl"
+              fontWeight="bold"
+              color="red.500"
+              letterSpacing="widest"
+              fontFamily="monospace"
+              px={3}
+              py={1}
+              borderRadius="md"
+              display="inline-block"
+              whileHover={{
+                scaleX: 1.1,
+              }}
+              transition={{
+                duration: 0.3,
+                ease: "easeInOut",
+              }}
             >
               FILM
-            </Box>
+            </MotionBox>
           </Link>
           {/* Desktop */}
           <Flex gap={4} alignItems={"center"}>
