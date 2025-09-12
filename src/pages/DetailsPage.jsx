@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import {
   fetchCredits,
   fetchDetails,
+  fetchVideos,
   imgPath500w,
   imgPathOriginal,
 } from "../services/api";
@@ -20,8 +21,18 @@ import {
   Spinner,
   Text,
 } from "@chakra-ui/react";
-import { AddIcon, CalendarIcon, CheckCircleIcon } from "@chakra-ui/icons";
-import { ratingToPercentage, resolveRatingColor } from "../utils/helpers";
+import {
+  AddIcon,
+  CalendarIcon,
+  CheckCircleIcon,
+  TimeIcon,
+} from "@chakra-ui/icons";
+import {
+  minutesToHours,
+  ratingToPercentage,
+  resolveRatingColor,
+} from "../utils/helpers";
+import Video from "../components/Video";
 
 function DetailsPage() {
   const router = useParams();
@@ -30,16 +41,29 @@ function DetailsPage() {
   const [details, setDetails] = useState({});
   const [loading, setLoading] = useState(true);
   const [cast, setCast] = useState({});
+  const [video, setVideo] = useState();
+  const [videos, setVideos] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const [detailsData, creditsData] = await Promise.all([
+        const [detailsData, creditsData, videosData] = await Promise.all([
           fetchDetails(type, id),
           fetchCredits(type, id),
+          fetchVideos(type, id),
         ]);
         setDetails(detailsData);
         setCast(creditsData?.cast?.slice(0, 10));
+        const video = videosData?.results?.find(
+          (video) => video?.type === "Trailer" && video?.site === "YouTube"
+        );
+        setVideo(video);
+        const videos = videosData?.results
+          ?.filter(
+            (video) => video?.type !== "Trailer" && video?.site === "YouTube"
+          )
+          ?.slice(0, 10);
+        setVideos(videos);
       } catch (error) {
         console.log(error, "error");
       } finally {
@@ -49,6 +73,8 @@ function DetailsPage() {
 
     fetchData();
   }, [type, id]);
+
+  console.log(video, videos, "videos");
 
   if (loading) {
     return (
@@ -112,6 +138,17 @@ function DetailsPage() {
                     {new Date(releaseDate).toLocaleDateString("pt-BR")} (BR)
                   </Text>
                 </Flex>
+                {type === "movie" && (
+                  <>
+                    <Box>·</Box>
+                    <Flex alignItems={"center"}>
+                      <TimeIcon mr={2} color={"gray.400"} />
+                      <Text fontSize={"small"}>
+                        {minutesToHours(details?.runtime)}
+                      </Text>
+                    </Flex>
+                  </>
+                )}
               </Flex>
               {/* ------------- */}
 
@@ -211,6 +248,23 @@ function DetailsPage() {
         >
           Videos
         </Heading>
+        <Video id={video?.key} />
+        <Flex mt={5} mb={10} overflowX={"scroll"} gap={5}>
+          {videos &&
+            videos?.map((item) => (
+              <Box key={item?.id} minW={290}>
+                <Video id={item?.key} small />
+                <Text
+                  fontSize={"small"}
+                  fontWeight={"bold"}
+                  mt={2}
+                  noOfLines={2}
+                >
+                  {item?.name}
+                </Text>
+              </Box>
+            ))}
+        </Flex>
       </Container>
     </Box>
   );
