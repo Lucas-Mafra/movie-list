@@ -13,3 +13,25 @@ export const fetchTrending = async (timeWindow = "day") => {
   );
   return data?.results;
 };
+
+// details movies and series
+export const fetchDetails = async (type, id) => {
+  const res = await axios.get(`${baseURL}/${type}/${id}?api_key=${apiKey}`);
+  return res?.data;
+};
+
+// credits movies and series
+export const fetchCredits = async (type, id) => {
+  const res = await axios.get(
+    `${baseURL}/${type}/${id}/credits?api_key=${apiKey}`
+  );
+  return res?.data;
+};
+
+// videos movies and series
+export const fetchVideos = async (type, id) => {
+  const res = await axios.get(
+    `${baseURL}/${type}/${id}/videos?api_key=${apiKey}`
+  );
+  return res?.data;
+};
