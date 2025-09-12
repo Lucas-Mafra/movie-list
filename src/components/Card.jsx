@@ -3,9 +3,9 @@ import { Link } from "react-router-dom";
 import { imgPath500w } from "../services/api";
 import { StarIcon } from "@chakra-ui/icons";
 
-const Card = ({ item }) => {
+const Card = ({ item, type }) => {
   return (
-    <Link to="/">
+    <Link to={`/${type}/${item?.id}`}>
       <Box
         position="relative"
         transform="scale(1)"
