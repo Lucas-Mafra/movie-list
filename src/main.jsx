@@ -10,6 +10,7 @@ import Movies from "./pages/movies/Movies.jsx";
 import Shows from "./pages/shows/Shows.jsx";
 import Search from "./pages/search/Search.jsx";
 import DetailsPage from "./pages/DetailsPage.jsx";
+import { AuthProvider } from "./context/authProvider";
 
 const router = createBrowserRouter([
   {
@@ -51,7 +52,9 @@ createRoot(document.getElementById("root")).render(
   <StrictMode>
     <ColorModeScript initialColorMode={theme.config.initialColorMode} />
     <ChakraProvider theme={theme} colorModeManager={customStorageManager}>
-      <RouterProvider router={router} />
+      <AuthProvider>
+        <RouterProvider router={router} />
+      </AuthProvider>
     </ChakraProvider>
   </StrictMode>
 );
