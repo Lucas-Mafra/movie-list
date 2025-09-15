@@ -152,7 +152,7 @@ function DetailsPage() {
               </Flex>
               {/* ------------- */}
 
-              {/* Notas dos usuários */}
+              {/* Notas dos usuários + Watchlist */}
               <Flex alignItems={"center"} gap={4}>
                 <CircularProgress
                   value={ratingToPercentage(details?.vote_average)}
@@ -192,7 +192,7 @@ function DetailsPage() {
               </Flex>
               {/* ---------- */}
 
-              {/* Detalhes adicionais */}
+              {/* Detalhes adicionais  */}
               <Text
                 color={"gray.400"}
                 fontSize={"small"}
@@ -234,7 +234,13 @@ function DetailsPage() {
           {cast &&
             cast?.map((item) => (
               <Box key={item?.id} minW={"150px"}>
-                <Image src={`${imgPath500w}/${item?.profile_path}`} />
+                <Image
+                  src={`${imgPath500w}/${item?.profile_path}`}
+                  w={"100%"}
+                  height={225}
+                  objectFit={"cover"}
+                  borderRadius={"sm"}
+                />
               </Box>
             ))}
         </Flex>
