@@ -3,6 +3,7 @@ export const minutesToHours = (minutes) => {
   const mins = minutes % 60;
   return `${hours}h ${mins}m`;
 };
+
 export const ratingToPercentage = (rating) => {
   return (rating * 10)?.toFixed(0);
 };

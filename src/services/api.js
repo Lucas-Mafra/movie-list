@@ -35,3 +35,19 @@ export const fetchVideos = async (type, id) => {
   );
   return res?.data;
 };
+
+// discover movies
+export const fetchMovies = async (page, sortBy) => {
+  const res = await axios.get(
+    `${baseURL}/discover/movie?api_key=${apiKey}&page=${page}&sort_by=${sortBy}`
+  );
+  return res?.data;
+};
+
+// discover tvshows
+export const fetchShows = async (page, sortBy) => {
+  const res = await axios.get(
+    `${baseURL}/discover/tv?api_key=${apiKey}&page=${page}&sort_by=${sortBy}`
+  );
+  return res?.data;
+};
