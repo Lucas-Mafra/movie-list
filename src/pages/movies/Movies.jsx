@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { fetchMovies } from "../../services/api";
 import Card from "../../components/Card";
 import SortMenu from "../../components/SortMenu";
+import Pagination from "../../components/Pagination";
 
 const Movies = () => {
   const [movies, setMovies] = useState([]);

@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { fetchShows } from "../../services/api";
 import Card from "../../components/Card";
 import SortMenu from "../../components/SortMenu";
+import Pagination from "../../components/Pagination";
 
 const Shows = () => {
   const [shows, setShows] = useState([]);
