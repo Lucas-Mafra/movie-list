@@ -29,7 +29,7 @@ const Home = () => {
 
   return (
     <Container maxW={"container.xl"}>
-      <Flex alignItems={"baseline"} gap={4} my={10}>
+      <Flex alignItems={"baseline"} gap={4} my={5}>
         <Heading as="h2" fontSize={"md"} textTransform={"uppercase"}>
           Trending
         </Heading>
