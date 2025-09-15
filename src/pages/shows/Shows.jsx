@@ -1,15 +1,7 @@
-import {
-  Container,
-  Flex,
-  Grid,
-  Heading,
-  Select,
-  Skeleton,
-} from "@chakra-ui/react";
+import { Container, Flex, Grid, Heading, Skeleton } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { fetchShows } from "../../services/api";
 import Card from "../../components/Card";
-import Pagination from "../../components/Pagination";
 import SortMenu from "../../components/SortMenu";
 
 const Shows = () => {
