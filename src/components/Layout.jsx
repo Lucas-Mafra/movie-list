@@ -1,17 +1,19 @@
-import Navbar from "./Navbar"
-import propTypes from "prop-types"
+import Footer from "./Footer";
+import Navbar from "./Navbar";
+import propTypes from "prop-types";
 
-function Layout({children}) {
+function Layout({ children }) {
   return (
     <>
-    <Navbar/>
-    <main>{children}</main>
+      <Navbar />
+      <main>{children}</main>
+      <Footer />
     </>
-  )
+  );
 }
 
 Layout.propTypes = {
-    children: propTypes.node.isRequired,
-}
+  children: propTypes.node.isRequired,
+};
 
-export default Layout
+export default Layout;
