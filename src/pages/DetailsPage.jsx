@@ -11,7 +11,6 @@ import {
   Badge,
   Box,
   Button,
-  Center,
   CircularProgress,
   CircularProgressLabel,
   Container,
@@ -20,6 +19,7 @@ import {
   Image,
   Spinner,
   Text,
+  useToast,
 } from "@chakra-ui/react";
 import {
   AddIcon,
@@ -33,16 +33,24 @@ import {
   resolveRatingColor,
 } from "../utils/helpers";
 import Video from "../components/Video";
+import { useAuth } from "../context/useAuth";
+import { useFirestore } from "../services/firestore";
 
 function DetailsPage() {
   const router = useParams();
   const { type, id } = router;
+
+  const { user } = useAuth();
+  const { addToWatchlist, checkIfInWatchlist, removeFromWatchlist } =
+    useFirestore();
+  const toast = useToast();
 
   const [details, setDetails] = useState({});
   const [loading, setLoading] = useState(true);
   const [cast, setCast] = useState({});
   const [video, setVideo] = useState();
   const [videos, setVideos] = useState([]);
+  const [inWatchlist, setInWatchlist] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -75,6 +83,47 @@ function DetailsPage() {
   }, [type, id]);
 
   console.log(video, videos, "videos");
+
+  const handleSaveToWatchlist = async () => {
+    if (!user) {
+      toast({
+        title: "Login to add to Watchlist",
+        status: "error",
+        isClosable: true,
+      });
+      return;
+    }
+    const data = {
+      id: details?.id,
+      title: details?.title || details?.name,
+      type: type,
+      poster_path: details?.poster_path,
+      release_date: details?.release_date || details?.first_air_date,
+      vote_average: details?.vote_average,
+      overview: details?.overview,
+    };
+
+    //console.log(data, "data");
+    //addDocument("watchlist", data);
+    const dataId = data?.id?.toString();
+    await addToWatchlist(user?.uid, dataId, data);
+    const saveInWatchlist = await checkIfInWatchlist(user?.uid, dataId);
+    setInWatchlist(saveInWatchlist);
+  };
+
+  useEffect(() => {
+    if (!user) {
+      setInWatchlist(false);
+      return;
+    }
+    checkIfInWatchlist(user?.uid, id).then((data) => setInWatchlist(data));
+  }, [id, user, checkIfInWatchlist]);
+
+  const handleRemoveFromWatchlist = async () => {
+    await removeFromWatchlist(user?.uid, id);
+    const saveInWatchlist = await checkIfInWatchlist(user?.uid, id);
+    setInWatchlist(saveInWatchlist);
+  };
 
   if (loading) {
     return (
@@ -173,22 +222,24 @@ function DetailsPage() {
                 <Text display={{ base: "none", md: "initial" }}>
                   Users Score
                 </Text>
-                <Button
-                  display={"none"}
-                  leftIcon={<CheckCircleIcon />}
-                  colorScheme="green"
-                  variant={"outline"}
-                  onClick={console.log("click")}
-                >
-                  In Watchlist
-                </Button>
-                <Button
-                  leftIcon={<AddIcon />}
-                  variant={"outline"}
-                  onClick={console.log("click")}
-                >
-                  Add to Watchlist
-                </Button>
+                {inWatchlist ? (
+                  <Button
+                    leftIcon={<CheckCircleIcon />}
+                    colorScheme="green"
+                    variant={"outline"}
+                    onClick={handleRemoveFromWatchlist}
+                  >
+                    In Watchlist
+                  </Button>
+                ) : (
+                  <Button
+                    leftIcon={<AddIcon />}
+                    variant={"outline"}
+                    onClick={handleSaveToWatchlist}
+                  >
+                    Add to Watchlist
+                  </Button>
+                )}
               </Flex>
               {/* ---------- */}
 
