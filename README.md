@@ -1,4 +1,4 @@
-![Film](public\home.png)
+![Film](public/home.png)
 
 FILM é um projeto de plataforma para consulta e gerenciamento de filmes e séries, permitindo adicionar títulos à watchlist, visualizar detalhes e buscar conteúdos.
 
