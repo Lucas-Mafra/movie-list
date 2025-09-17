@@ -1,12 +1,32 @@
-# React + Vite
+![Film](public\home.png)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+FILM é um projeto de plataforma para consulta e gerenciamento de filmes e séries, permitindo adicionar títulos à watchlist, visualizar detalhes e buscar conteúdos.
 
-Currently, two official plugins are available:
+## Tecnologias Utilizadas
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Frontend**
 
-## Expanding the ESLint configuration
+  - React.js
+  - Chakra UI (componentes e estilos)
+  - React Router (navegação)
+  - Framer Motion (animações)
+  - React Icons (ícones)
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- **Backend / Serviços**
+
+  - Firebase Authentication (login com Google)
+  - Firebase Firestore (armazenamento de watchlist)
+  - TMDB API
+
+- **Outras Ferramentas**
+  - Vite (bundler e desenvolvimento)
+  - Axios / Fetch API (consumo de APIs externas, se houver)
+  - Git & GitHub (controle de versão)
+
+## Funcionalidades
+
+- Login com Google
+- Adicionar e remover itens da Watchlist
+- Visualizar detalhes de filmes e séries
+- Pesquisa de títulos
+- Interface responsiva (desktop e mobile)
