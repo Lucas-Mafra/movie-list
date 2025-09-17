@@ -20,8 +20,7 @@ FILM é um projeto de plataforma para consulta e gerenciamento de filmes e séri
 
 - **Outras Ferramentas**
   - Vite (bundler e desenvolvimento)
-  - Axios / Fetch API (consumo de APIs externas, se houver)
-  - Git & GitHub (controle de versão)
+  - Axios
 
 ## Funcionalidades
 
