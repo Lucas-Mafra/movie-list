@@ -36,8 +36,9 @@ const Home = () => {
         <Flex
           alignItems={"center"}
           gap={2}
-          border={"1px solid teal"}
+          border={"1px solid"}
           borderRadius={20}
+          borderColor={"red"}
         >
           <Box
             as="button"
