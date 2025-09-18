@@ -1,14 +1,17 @@
+import { Box } from "@chakra-ui/react";
 import Footer from "./Footer";
 import Navbar from "./Navbar";
 import propTypes from "prop-types";
 
 function Layout({ children }) {
   return (
-    <>
+    <Box minH={"100vh"} display={"flex"} flexDirection={"column"}>
       <Navbar />
-      <main>{children}</main>
+      <Box flex={1} as="main">
+        <main>{children}</main>
+      </Box>
       <Footer />
-    </>
+    </Box>
   );
 }
 

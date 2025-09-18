@@ -35,6 +35,7 @@ import {
 import Video from "../components/Video";
 import { useAuth } from "../context/useAuth";
 import { useFirestore } from "../services/firestore";
+import CastCard from "../components/CastCard";
 
 function DetailsPage() {
   const router = useParams();
@@ -82,7 +83,7 @@ function DetailsPage() {
     fetchData();
   }, [type, id]);
 
-  console.log(video, videos, "videos");
+  console.log(cast, "cast");
 
   const handleSaveToWatchlist = async () => {
     if (!user) {
@@ -103,8 +104,6 @@ function DetailsPage() {
       overview: details?.overview,
     };
 
-    //console.log(data, "data");
-    //addDocument("watchlist", data);
     const dataId = data?.id?.toString();
     await addToWatchlist(user?.uid, dataId, data);
     const saveInWatchlist = await checkIfInWatchlist(user?.uid, dataId);
@@ -284,15 +283,12 @@ function DetailsPage() {
           {cast?.length === 0 && <Text>No cast found</Text>}
           {cast &&
             cast?.map((item) => (
-              <Box key={item?.id} minW={"150px"}>
-                <Image
-                  src={`${imgPath500w}/${item?.profile_path}`}
-                  w={"100%"}
-                  height={225}
-                  objectFit={"cover"}
-                  borderRadius={"sm"}
-                />
-              </Box>
+              <CastCard
+                key={item?.id}
+                name={item?.name}
+                character={item?.character}
+                img={`${imgPath500w}/${item?.profile_path}`}
+              />
             ))}
         </Flex>
 

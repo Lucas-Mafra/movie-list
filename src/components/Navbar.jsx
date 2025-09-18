@@ -110,11 +110,22 @@ const Navbar = () => {
                     src={user?.photoURL}
                   />
                 </MenuButton>
-                <MenuList>
+                <MenuList bg="black">
                   <Link to="/watchlist">
-                    <MenuItem>Watchlist</MenuItem>
+                    <MenuItem
+                      bg="black"
+                      _hover={{ bg: "red.500", color: "white" }}
+                    >
+                      Watchlist
+                    </MenuItem>
                   </Link>
-                  <MenuItem onClick={logout}>Logout</MenuItem>
+                  <MenuItem
+                    onClick={logout}
+                    bg="black"
+                    _hover={{ bg: "red.500", color: "white" }}
+                  >
+                    Logout
+                  </MenuItem>
                 </MenuList>
               </Menu>
             ) : (
